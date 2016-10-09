@@ -4,10 +4,11 @@ html, body {
 }
 
 button {
+  display: inline-block;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   border: 0;
-  background: none;
+  background: #999;
   font-size: 100%;
   vertical-align: baseline;
   font-family: inherit;
