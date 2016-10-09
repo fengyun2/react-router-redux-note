@@ -4,6 +4,10 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import * as ItemsActions from 'ACTIONS'
 import { bindActionCreators } from 'redux'
 
+import SearchBar from 'COMPONENTS/Items/SearchBar'
+
+import styles from './style.css'
+
 class App extends Component {
   constructor (props) {
       super(props)
@@ -11,16 +15,13 @@ class App extends Component {
   }
 
   render () {
-      let styles = {
-          width: '200px',
-          margin: '30px auto 0',
-      }
 
     const {items, filter, actions, children} = this.props
 
     return (
-      <div style={styles}>
-        <h2>Manage Items</h2>
+      <div className={styles.normal}>
+        <h1>Manage Items</h1>
+        <SearchBar filterItem={actions.filterItem} />
       </div>
     )
   }

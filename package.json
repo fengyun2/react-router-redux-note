@@ -27,7 +27,8 @@
     "redux-thunk": "^2.1.0",
     "react-immutable-render-mixin": "^0.9.7",
     "fbjs": "^0.8.5",
-    "react-addons-pure-render-mixin": "^15.3.2"
+    "react-addons-pure-render-mixin": "^15.3.2",
+    "keymirror": "^0.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.0",
@@ -78,6 +79,8 @@
     "postcss-font-magician": "^1.4.0",
     "postcss-gradientfixer": "^0.0.6",
     "babel-preset-react": "^6.16.0",
-    "react-hot-loader": "^3.0.0-beta.5"
+    "react-hot-loader": "^3.0.0-beta.5",
+    "style-loader": "^0.13.1",
+    "rucksack-css": "^0.8.6"
   }
 }

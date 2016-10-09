@@ -1,34 +1,34 @@
 /**
- * 已经废弃
 * @Date:   2016-09-29T09:01:07+08:00
 * @Last modified time: 2016-09-29T10:25:04+08:00
 */
 
-var webpack = require('webpack');
-var path = require('path');
-var fs = require('fs');
-var precss = require('precss');
-var autoprefixer = require('autoprefixer');
+let webpack = require('webpack')
+let path = require('path')
+let fs = require('fs')
+let precss = require('precss')
+let autoprefixer = require('autoprefixer')
 
-var index_file = path.resolve(__dirname, 'src/index.html');
+let index_file = path.resolve(__dirname, 'src/index.html')
 fs.readFile(index_file, 'utf-8', function(err, data) {
     if (err) {
-        console.log('error: ', err);
+        console.log('error: ', err)
     } else {
-        var devhtml = data;
+        let devhtml = data
         if (data.indexOf('/bundle.js') < 0) {
-            devhtml = devhtml.replace('<script></script>', '<script></script><script type="text/javascript" src="/bundle.js"></script>');
+            devhtml = devhtml.replace('<script></script>', '<script></script><script type="text/javascript" src="/bundle.js"></script>')
         }
-        fs.writeFileSync(index_file, devhtml);
+        fs.writeFileSync(index_file, devhtml)
     }
-});
+})
 
-var static_url = 'assets/';
+let static_url = 'assets/'
 module.exports = {
     debug: true,
     devServer: {
         historyApiFallback: true,
         hot: true,
+        quiet: true,
         inline: true,
         progress: true,
         contentBase: './src',
@@ -54,18 +54,19 @@ module.exports = {
                 loader: 'vue'
             },
             {
-              test: /\.css$/,
+              test: /\.(css|scss)$/,
               include: path.resolve(__dirname, 'src'),
               loaders: [
                 'style-loader',
-                'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[local]___[hash:base64:5]',
+                'css-loader?modules&importLoaders=1&localIdentName=[name]___[local]-[hash:base64:5]&sourceMap=true',
+                'sass-loader',
                 'postcss-loader'
               ]
             },
             {
-              test: /\.css$/,
-              exclude: /client/,
-              loader: 'style!css'
+              test: /\.(css|scss)$/,
+              exclude: /src/,
+              loader: 'style!css!sass!postcss&sourceMap=true'
             },
              {
                 test: /\.(js|jsx)$/,
@@ -88,37 +89,6 @@ module.exports = {
                 include: path.resolve(__dirname, 'src'),
                 loader: 'html'
             }
-            /*        {
-                        test: /\.(png|jpg|gif|svg)$/,
-                        include: path.resolve(__dirname, 'src'),
-                        loader: 'url',
-                        query: {
-                            limit: 1,
-                            name: '[name].[ext]?[hash]'
-                        }
-                    }, {
-                        test: /\.(html|tpl)$/,
-                        include: path.resolve(__dirname, 'src'),
-                        loader: 'html'
-                    }, {
-                        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                        include: path.resolve(__dirname, 'src'),
-                        loader: 'url-loader?limit=10000&minetype=srclication/font-woff'
-                    }, {
-                        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                        include: path.resolve(__dirname, 'src'),
-                        loader: 'url',
-                        query: {
-                            name: '[name].[ext]?mimetype=srclication/font-woff2'
-                        }
-                    }, {
-                        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                        include: path.resolve(__dirname, 'src'),
-                        loader: 'url',
-                        query: {
-                            name: '[name].[ext]?mimetype=srclication/font-woff2'
-                        }
-                    }*/
         ]
     },
     externals: {
@@ -163,11 +133,10 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         function() {
             return this.plugin('done', function(stats) {
-                var content;
-                content = JSON.stringify(stats.toJson().assetsByChunkName, null, 2);
-                console.log('版本是：' + JSON.stringify(stats.toJson().hash));
-            });
+                let content = JSON.stringify(stats.toJson().assetsByChunkName, null, 2)
+                console.log('编译完成, 当前版本是：' + JSON.stringify(stats.toJson().hash))
+            })
         },
     ],
     devtool: '#eval-source-map'
-};
+}

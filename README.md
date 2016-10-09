@@ -39,3 +39,5 @@ npm run build
 
 1. `npm run dev` 和 `npm run build` 暂不能使用
 2. `bindActionCreators` 写错名称
+3. `webpack.config.js` 的 'css exclude: /src/' 路径有误, 导致引入css报错
+4. 想不通为啥 `constants/actionTypes.js` 里 使用 `keyMirror` 导出对象会读取不到, 而在当前文件却可以读取到, 好奇怪。
