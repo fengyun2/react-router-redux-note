@@ -28,7 +28,8 @@
     "react-immutable-render-mixin": "^0.9.7",
     "fbjs": "^0.8.5",
     "react-addons-pure-render-mixin": "^15.3.2",
-    "keymirror": "^0.1.1"
+    "keymirror": "^0.1.1",
+    "lodash": "^4.16.4"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.0",
